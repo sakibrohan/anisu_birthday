@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Happy Birthday Anisa</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Open+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        margin: 0;
+        background: #0d0d0d;
+        color: #fff;
+        font-family: "Open Sans", sans-serif;
+        overflow-x: hidden;
+        background-attachment: fixed;
+        position: relative;
+      }
+      header {
+        text-align: center;
+        padding: 2rem;
+        font-family: "Great Vibes", cursive;
+        font-size: 3rem;
+        color: #ff007f;
+        text-shadow: 2px 2px #fff0f5;
+      }
+      section {
+        margin: 2rem auto;
+        padding: 1rem;
+        max-width: 800px;
+      }
+      .card {
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 12px;
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 0 20px rgba(255, 110, 199, 0.4);
+        backdrop-filter: blur(10px);
+      }
+      .balloons-container {
+        position: relative;
+        height: 300px;
+        overflow: hidden;
+      }
+      .balloon {
+        background: #ff6ec7;
+        padding: 10px 20px;
+        border-radius: 50% 50% 50% 50%;
+        font-size: 16px;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        animation: floatBalloon 5s linear forwards;
+        white-space: nowrap;
+        text-align: center;
+        min-width: 120px;
+      }
+      @keyframes floatBalloon {
+        0% {
+          top: 100%;
+          opacity: 0;
+        }
+        10% {
+          opacity: 1;
+        }
+        90% {
+          opacity: 1;
+        }
+        100% {
+          top: -50px;
+          opacity: 0;
+        }
+      }
+      .memory-wheel {
+        text-align: center;
+      }
+      .wheel-box {
+        border: 2px dashed #ff69b4;
+        padding: 20px;
+        margin: 1rem auto;
+        color: #fff;
+        font-weight: bold;
+        background-color: #ffb6c1;
+        border-radius: 10px;
+      }
+      .love-letter {
+        font-style: italic;
+        white-space: pre-line;
+        display: none;
+        color: #fff;
+      }
+      .quiz-question input {
+        padding: 0.5rem;
+        width: 100%;
+        border-radius: 5px;
+        border: none;
+        margin-top: 0.5rem;
+      }
+      .photo-gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 10px;
+      }
+      .photo-gallery img {
+        width: 100%;
+        border-radius: 10px;
+      }
+      button {
+        background: #ff69b4;
+        color: #fff;
+        padding: 0.5rem 1rem;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+      button:hover {
+        background: #ff85c1;
+      }
+      #countdown {
+        font-size: 2rem;
+        text-align: center;
+        margin-top: 1rem;
+      }
+      .firework {
+        position: absolute;
+        width: 5px;
+        height: 5px;
+        background: radial-gradient(circle, #ff69b4, #ffb6c1, #fff);
+        animation: explode 1.2s ease-out forwards;
+        border-radius: 50%;
+        z-index: 9999;
+      }
+      @keyframes explode {
+        0% {
+          transform: translate(0, 0);
+          opacity: 1;
+        }
+        100% {
+          transform: translate(var(--x), var(--y));
+          opacity: 0;
+        }
+      }
+      canvas#bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+      }
+      .heart {
+        position: fixed;
+        width: 20px;
+        height: 20px;
+        background-color: pink;
+        transform: rotate(45deg);
+        animation: float 5s infinite;
+        z-index: 0;
+      }
+      .heart::before,
+      .heart::after {
+        content: "";
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background-color: pink;
+        border-radius: 50%;
+      }
+      .heart::before {
+        top: -10px;
+        left: 0;
+      }
+      .heart::after {
+        left: -10px;
+        top: 0;
+      }
+      @keyframes float {
+        0% {
+          transform: translateY(0) rotate(45deg);
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(-100vh) rotate(45deg);
+          opacity: 0;
+        }
+      }
+      .swiper {
+        width: 100%;
+        padding-top: 20px;
+        padding-bottom: 40px;
+      }
+      .swiper-slide {
+        background-position: center;
+        background-size: cover;
+        width: 300px;
+        height: 200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .swiper-slide img {
+        width: 100%;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      }
+    </style>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/swiper/swiper-bundle.min.css"
+    />
+  </head>
+  <body>
+    <header>Happy Birthday Anisa</header>
+
+    <section class="card">
+      <h2>🎉 Countdown to Celebration</h2>
+      <div id="countdown"></div>
+    </section>
+
+    <section class="card">
+      <h2>💌 From Your Loving Man</h2>
+      <p>
+        Roses are red<br />Violets are blue<br />There are a lot of hands<br />But
+        I only want to hold yours
+      </p>
+      <p>
+        অনিসা, আমি তোমাকে ভালোবাসি। তোমার এই অপূর্ব চোখের মায়ায়ই আমি প্রেমে
+        পড়েছি তোমার। আমাদের ভালোবাসা রূপকথার থেকে কম নয়। প্রথম দেখা সেই হলুদ
+        থেকে আজ আমরা এতদিন একসাথে। কত ঝগড়া, কত কথা কাটা কাটি, কিন্তু কিছুই
+        আমাদের ভালোবাসাকে কমাতে পারেনি। উল্টো আমার ভালোবাসা প্রতিদিনই তোমার জন্য
+        বাড়ছে। প্রতিবার তোমাকে দেখলে নতুনভাবে প্রেমে পড়ি। হয়তো আজকের দিনেই
+        তুমি না জন্ম নিলে আমি এত সুন্দর নারীর দেখা পাইতাম না। তাই স্পেশাল
+        ধন্যবাদ তোমার আব্বু আর আম্মুকে। পরীক্ষার অনেক চাপ, কিন্তু আর কয়েকটা
+        দিনের পর সব শেষ হয়ে যাবে। জান, আমি তোমাকে অনেক ভালোবাসি। দোয়া করবো
+        যাতে আরও নেক হায়াত পাও আর সামনে দিনগুলো আরও ভালোভাবে কাটাতে পারো। শুভ
+        জন্মদিন আমার ভালোবাসাকে।
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>🎈 Floating Memories</h2>
+      <div class="balloons-container" id="balloons"></div>
+    </section>
+
+    <section class="card memory-wheel">
+      <h2>🔄 Memory Wheel</h2>
+      <div class="wheel-box" id="memoryWheel">Click the button to spin</div>
+      <button onclick="spinWheel()">Spin</button>
+    </section>
+
+    <section class="card">
+      <h2>🔐 Puzzle to Unlock Love Letter</h2>
+      <p>Favourite part of your body?</p>
+      <input type="text" id="letterPassword" placeholder="Your answer..." />
+      <button onclick="unlockLetter()">Unlock</button>
+      <p class="love-letter" id="loveLetter"></p>
+    </section>
+
+    <section class="card">
+      <h2>💑 Couple Quiz</h2>
+      <div id="quiz"></div>
+    </section>
+    <section class="card">
+      <h2>🧠 Memory Match Game</h2>
+      <div
+        id="memory-game"
+        style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px"
+      ></div>
+    </section>
+
+    <section class="card">
+      <h2>📸 Photo Carousel</h2>
+      <div class="swiper mySwiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <img src="b1.jpg" alt="Anisa 1" />
+          </div>
+          <div class="swiper-slide">
+            <img src="b2.jpg" alt="Anisa 2" />
+          </div>
+          <div class="swiper-slide">
+            <img src="b3.jpg" alt="Photo 2" />
+          </div>
+          <div class="swiper-slide">
+            <img src="b4.jpg" alt="Photo 3" />
+          </div>
+          <div class="swiper-slide">
+            <img src="b5.jpg" alt="Photo 3" />
+          </div>
+          <div class="swiper-slide">
+            <img src="b6.jpg" alt="Photo 3" />
+          </div>
+          <div class="swiper-slide">
+            <img src="b7.jpg" alt="Photo 3" />
+          </div>
+        </div>
+        <div class="swiper-pagination"></div>
+      </div>
+    </section>
+    >
+
+    <audio id="hiddenAudio" autoplay loop muted>
+      <source
+        src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_88b05f3c13.mp3?filename=happy-birthday-to-you-12362.mp3"
+        type="audio/mpeg"
+      />
+    </audio>
+
+    <canvas id="bg"></canvas>
+    <canvas id="petals-canvas"></canvas>
+
+    <script>
+      const messages = [
+        "Our first kiss felt very special🤤",
+        "Remeber the momos we had?",
+        "Walking with you was the best thing i had done in my life😗",
+        "holding your hand for the first time was so exciting🔥",
+        "The feeling sitting in the rickshaw 🫶",
+        "the first time i saw you❤‍🔥",
+        "You are so so so beautiful jan💞",
+        "I will never forget the sweet🥨",
+        "When i will get to serve you another time?😚",
+        "First time seeing you boobies🥹",
+        "You are an angel👼",
+        "the urge to see you in bride dress👰",
+        "Choosing you was my best decision😍",
+        "I will love you forever💖",
+        "Your body is so perfect✨",
+      ];
+
+      function floatMessages(index = 0) {
+        if (index >= messages.length) return;
+        const container = document.getElementById("balloons");
+        const b = document.createElement("div");
+        b.className = "balloon";
+        b.textContent = messages[index];
+        container.innerHTML = "";
+        container.appendChild(b);
+        setTimeout(() => floatMessages(index + 1), 5500);
+      }
+
+      const wheel = document.getElementById("memoryWheel");
+      function spinWheel() {
+        wheel.textContent =
+          messages[Math.floor(Math.random() * messages.length)];
+      }
+
+      const quizData = [
+        { q: "What is my favourite food?", a: "anything she answers" },
+        { q: "When is our anniversary?", a: "anything she answers" },
+        { q: "What did I wear in the holud?", a: "anything she answers" },
+        { q: "What did I first buy you?", a: "anything she answers" },
+        { q: "What is my intension with you?", a: "anything she answers" },
+      ];
+
+      const quizDiv = document.getElementById("quiz");
+      quizData.forEach((item, i) => {
+        const q = document.createElement("div");
+        q.className = "quiz-question";
+        q.innerHTML = `<strong>${i + 1}. ${
+          item.q
+        }</strong><br><input type="text" id="quiz${i}" placeholder="Your answer...">`;
+        quizDiv.appendChild(q);
+      });
+
+      const submitBtn = document.createElement("button");
+      submitBtn.textContent = "Submit Answers";
+      submitBtn.onclick = () => {
+        quizData.forEach((item, i) => {
+          const input = document.getElementById(`quiz${i}`);
+          const correct = item.a.toLowerCase();
+          const userAnswer = input.value.toLowerCase().trim();
+          input.style.backgroundColor =
+            userAnswer === correct || correct === "anything she answers"
+              ? "#8BC34A"
+              : "#f44336";
+          input.disabled = true;
+        });
+      };
+      quizDiv.appendChild(submitBtn);
+
+      const countdownElement = document.getElementById("countdown");
+      const birthday = new Date("June 26, 2025 22:43:00"); // corrected to June.getTime();
+      setInterval(() => {
+        const now = new Date().getTime();
+        const distance = birthday - now;
+        if (distance < 0) {
+          countdownElement.innerHTML = "🎉 It's Anisa's Birthday Today! 🎉";
+          launchFireworks();
+          return;
+        }
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor(
+          (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+        );
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        countdownElement.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s left`;
+      }, 1000);
+
+      function unlockLetter() {
+        const input = document.getElementById("letterPassword");
+        const letterBox = document.getElementById("loveLetter");
+        const correct = input.value.toLowerCase().trim() === "boobies";
+        if (!correct) {
+          letterBox.textContent = "Wrong password. Try again!";
+          letterBox.style.display = "block";
+          return;
+        }
+        const letter = `Dear beyain,\nHappy birthday my love. It is our first birthday together. I am really sorry I am not here with you to celebrate. But hopefully next year we will be together. Sometimes I feel like it is all a dream. You are so perfect. I am very lucky to have you sweetheart. May your life become easy and peaceful. I love you honey.\nYour loving,\nBeyai.`;
+        letterBox.style.display = "block";
+        let i = 0;
+        letterBox.textContent = "";
+        const typer = setInterval(() => {
+          if (i < letter.length) {
+            letterBox.textContent += letter.charAt(i);
+            i++;
+          } else {
+            clearInterval(typer);
+          }
+        }, 40);
+      }
+
+      function launchFireworks() {
+        for (let i = 0; i < 80; i++) {
+          const f = document.createElement("div");
+          f.className = "firework";
+          f.style.left = `${Math.random() * 100}%`;
+          f.style.top = `${Math.random() * 100}%`;
+          f.style.setProperty("--x", `${Math.random() * 300 - 150}px`);
+          f.style.setProperty("--y", `${Math.random() * 300 - 150}px`);
+          document.body.appendChild(f);
+          setTimeout(() => f.remove(), 1200);
+        }
+      }
+
+      window.onload = () => floatMessages();
+      const bg = document.getElementById("bg");
+      const ctx = bg.getContext("2d");
+      bg.width = window.innerWidth;
+      bg.height = window.innerHeight;
+
+      const particles = [];
+      for (let i = 0; i < 150; i++) {
+        particles.push({
+          x: Math.random() * bg.width,
+          y: Math.random() * bg.height,
+          r: Math.random() * 1.5 + 0.5,
+          d: Math.random() * 1,
+        });
+      }
+
+      function drawParticles() {
+        ctx.clearRect(0, 0, bg.width, bg.height);
+        ctx.fillStyle = "rgba(255,255,255,0.6)";
+        particles.forEach((p) => {
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fill();
+        });
+        moveParticles();
+      }
+
+      function moveParticles() {
+        particles.forEach((p) => {
+          p.y += p.d;
+          if (p.y > bg.height) {
+            p.y = 0;
+            p.x = Math.random() * bg.width;
+          }
+        });
+      }
+      setInterval(drawParticles, 33);
+
+      function createHeart() {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.top = "100vh";
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 5000);
+      }
+      setInterval(createHeart, 500);
+    </script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script>
+      const swiper = new Swiper(".mySwiper", {
+        effect: "coverflow",
+        grabCursor: true,
+        centeredSlides: true,
+        slidesPerView: "auto",
+        autoplay: {
+          delay: 3000,
+          disableOnInteraction: false,
+        },
+        coverflowEffect: {
+          rotate: 30,
+          stretch: 0,
+          depth: 100,
+          modifier: 1,
+          slideShadows: true,
+        },
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
+      });
+
+      // Falling Petals
+      const petalsCanvas = document.getElementById("petals-canvas");
+      const petalsCtx = petalsCanvas.getContext("2d");
+      petalsCanvas.width = window.innerWidth;
+      petalsCanvas.height = window.innerHeight;
+      const petals = [];
+
+      for (let i = 0; i < 30; i++) {
+        petals.push({
+          x: Math.random() * petalsCanvas.width,
+          y: Math.random() * petalsCanvas.height,
+          r: Math.random() * 4 + 2,
+          d: Math.random() * 1 + 0.5,
+          img: new Image(),
+        });
+        petals[i].img.src = "https://i.ibb.co/2v4nT4L/petal.png";
+      }
+
+      function drawPetals() {
+        petalsCtx.clearRect(0, 0, petalsCanvas.width, petalsCanvas.height);
+        for (let i = 0; i < petals.length; i++) {
+          const p = petals[i];
+          petalsCtx.drawImage(p.img, p.x, p.y, 20, 20);
+          p.y += p.d;
+          p.x += Math.sin(p.y * 0.01);
+          if (p.y > petalsCanvas.height) {
+            p.y = -20;
+            p.x = Math.random() * petalsCanvas.width;
+          }
+        }
+      }
+      setInterval(drawPetals, 33);
+    </script>
+    <script>
+      const memoryWords = ["❤️", "💋", "🎂", "🌹", "🎁", "💖", "😍", "😘"];
+      const memoryGameContainer = document.getElementById("memory-game");
+      let memoryCards = [...memoryWords, ...memoryWords];
+      let firstCard = null;
+      let lock = false;
+
+      function shuffle(arr) {
+        for (let i = arr.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+      }
+
+      function createCard(symbol) {
+        const card = document.createElement("div");
+        card.textContent = "❓";
+        card.style.background = "#ffb6c1";
+        card.style.padding = "20px";
+        card.style.fontSize = "2rem";
+        card.style.textAlign = "center";
+        card.style.borderRadius = "8px";
+        card.dataset.symbol = symbol;
+        card.onclick = () => {
+          if (lock || card.textContent !== "❓") return;
+          card.textContent = symbol;
+          if (!firstCard) {
+            firstCard = card;
+          } else {
+            if (firstCard.dataset.symbol === card.dataset.symbol) {
+              firstCard = null;
+            } else {
+              lock = true;
+              setTimeout(() => {
+                firstCard.textContent = "❓";
+                card.textContent = "❓";
+                firstCard = null;
+                lock = false;
+              }, 800);
+            }
+          }
+        };
+        return card;
+      }
+
+      shuffle(memoryCards);
+      memoryCards.forEach((symbol) =>
+        memoryGameContainer.appendChild(createCard(symbol))
+      );
+    </script>
+
+    <!-- Heart Trail on Cursor -->
+    <script>
+      document.addEventListener("mousemove", (e) => {
+        const heart = document.createElement("div");
+        heart.className = "cursor-heart";
+        heart.style.left = `${e.pageX}px`;
+        heart.style.top = `${e.pageY}px`;
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 600);
+      });
+    </script>
+  </body>
+</html>
