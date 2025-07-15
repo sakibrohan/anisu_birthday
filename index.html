@@ -262,6 +262,13 @@
     <section class="card">
       <h2>💑 Couple Quiz</h2>
       <div id="quiz"></div>
+      <p
+        id="quizPrize"
+        style="display: none; font-size: 1.2rem; color: gold; margin-top: 1rem"
+      >
+        🏆 Congratulations! You've unlocked the prize: 1 big kiss and a lifetime
+        with me and 50 taka
+      </p>
     </section>
     <section class="card">
       <h2>🧠 Memory Match Game</h2>
@@ -349,10 +356,10 @@
       }
 
       const quizData = [
-        { q: "What is my favourite food?", a: "anything she answers" },
+        { q: "Whom do i love the most?", a: "anisa" },
         { q: "When is our anniversary?", a: "anything she answers" },
-        { q: "What did I wear in the holud?", a: "anything she answers" },
-        { q: "What did I first buy you?", a: "anything she answers" },
+        { q: "How much do I love you?", a: "anything she answers" },
+        { q: "What is my favourite song ?", a: "Tum Mile" },
         { q: "What is my intension with you?", a: "anything she answers" },
       ];
 
@@ -369,21 +376,27 @@
       const submitBtn = document.createElement("button");
       submitBtn.textContent = "Submit Answers";
       submitBtn.onclick = () => {
+        let allCorrect = true;
         quizData.forEach((item, i) => {
           const input = document.getElementById(`quiz${i}`);
           const correct = item.a.toLowerCase();
           const userAnswer = input.value.toLowerCase().trim();
-          input.style.backgroundColor =
-            userAnswer === correct || correct === "anything she answers"
-              ? "#8BC34A"
-              : "#f44336";
+          const isCorrect =
+            userAnswer === correct || correct === "anything she answers";
+          input.style.backgroundColor = isCorrect ? "#8BC34A" : "#f44336";
           input.disabled = true;
+          if (!isCorrect) allCorrect = false;
         });
+
+        if (allCorrect) {
+          document.getElementById("quizPrize").style.display = "block";
+        }
       };
+
       quizDiv.appendChild(submitBtn);
 
       const countdownElement = document.getElementById("countdown");
-      const birthday = new Date("June 26, 2025 22:43:00"); // corrected to June.getTime();
+      const birthday = new Date("July 23, 2025 00:00:00"); // corrected to June.getTime();
       setInterval(() => {
         const now = new Date().getTime();
         const distance = birthday - now;
@@ -604,5 +617,75 @@
         setTimeout(() => heart.remove(), 600);
       });
     </script>
+
+    <!-- 🌟 Love Timeline -->
+    <section class="card">
+      <h2>📅 Our Love Timeline</h2>
+      <ul style="list-style-type: none; padding-left: 0">
+        <li>💘 First Talk – Feb 16, 2025</li>
+        <li>🌼 First Date – Mar 23, 2025</li>
+        <li>💍 Officially Together – Feb 23, 2025</li>
+        <li>🎉 First Birthday Together – June 2025</li>
+      </ul>
+    </section>
+
+    <!-- 🔊 Voice Message -->
+    <section class="card">
+      <h2>🎤 Voice from the Heart</h2>
+      <audio controls>
+        <source src="voice.mp3.mp3" type="audio/mp3" />
+        Your browser does not support the audio element.
+      </audio>
+    </section>
+
+    <!-- 🎁 Surprise Reveal -->
+    <section class="card" id="surpriseSection">
+      <h2>🎁 Tap to Reveal Your Surprise</h2>
+      <button onclick="revealSurprise()">Reveal</button>
+      <p
+        id="surpriseMessage"
+        style="display: none; font-size: 1.2rem; margin-top: 1rem"
+      >
+        You're my forever gift, Anisa 💖
+      </p>
+    </section>
+
+    <!-- 🎬 Memory Video -->
+    <section class="card">
+      <h2>🎬 Birthday Song</h2>
+      <iframe
+        width="800"
+        height="315"
+        src="https://www.youtube.com/embed/5u4xTa3LR2U?si=jonrTq_eV-6n7Ijw&amp;start=17"
+        title="YouTube video player"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen
+      ></iframe>
+    </section>
+
+    <!-- 🌗 Light/Dark Mode Toggle -->
+
+    <script>
+      function revealSurprise() {
+        document.getElementById("surpriseMessage").style.display = "block";
+      }
+
+      function toggleTheme() {
+        document.body.classList.toggle("light-mode");
+      }
+    </script>
+
+    <style>
+      .light-mode {
+        background: #fff !important;
+        color: #000 !important;
+      }
+      .light-mode .card {
+        background: rgba(0, 0, 0, 0.05) !important;
+        color: #000 !important;
+      }
+    </style>
   </body>
 </html>
